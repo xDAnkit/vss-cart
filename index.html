@@ -25,9 +25,12 @@
     <script>
       // Function to handle messages received from React Native
       window.addEventListener("message", function (event) {
+        alert("Aaya Bhai");
+
         const { platform } = event.data;
         if (!platform) return;
 
+        alert("Aaya Bhai");
         console.log("Received message in WebView:", platform);
 
         // You can handle the received data here or perform any other actions
@@ -37,6 +40,7 @@
 
       // Function to send a message to React Native
       function sendMessageToReactNative() {
+        alert("Jara Bhai");
         const messageToReactNative = "Hello from WebView!";
         window.ReactNativeWebView.postMessage(messageToReactNative);
       }
