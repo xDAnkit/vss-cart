@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="script-src 'self' 'unsafe-eval';"
+      content="script-src 'self' 'unsafe-eval' 'unsafe-inline';"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WebView Communication</title>
@@ -25,19 +25,18 @@
     <script>
       // Function to handle messages received from React Native
       window.addEventListener("message", function (event) {
-        alert("Aaya yaha");
-        const dataFromReactNative = event.data;
-        console.log("Received message in WebView:", dataFromReactNative);
+        const { platform } = event.data;
+        if (!platform) return;
+
+        console.log("Received message in WebView:", platform);
 
         // You can handle the received data here or perform any other actions
         // For example, update the content of the HTML page with the received data
-        document.getElementById("receivedData").innerHTML = dataFromReactNative;
+        document.getElementById("receivedData").innerHTML = platform;
       });
 
       // Function to send a message to React Native
       function sendMessageToReactNative() {
-        alert("Ja raha yaha se");
-
         const messageToReactNative = "Hello from WebView!";
         window.ReactNativeWebView.postMessage(messageToReactNative);
       }
