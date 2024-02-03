@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebView Communication</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+      button {
+        padding: 10px;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>WebView Communication Example</h1>
+
+    <script>
+      // Function to handle messages received from React Native
+      window.addEventListener("message", function (event) {
+        const dataFromReactNative = event.data;
+        console.log("Received message in WebView:", dataFromReactNative);
+
+        // You can handle the received data here or perform any other actions
+        // For example, update the content of the HTML page with the received data
+        document.getElementById("receivedData").innerHTML = dataFromReactNative;
+      });
+
+      // Function to send a message to React Native
+      function sendMessageToReactNative() {
+        const messageToReactNative = "Hello from WebView!";
+        window.ReactNativeWebView.postMessage(messageToReactNative);
+      }
+    </script>
+
+    <button onclick="sendMessageToReactNative()">
+      Send Message to React Native
+    </button>
+
+    <p id="receivedData">Waiting for data from React Native...</p>
+  </body>
+</html>
