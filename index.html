@@ -31,32 +31,10 @@
 </html>
 
 <script>
-  // Check if postMessage is not already defined
-  if (!window.postMessage) {
-    // Polyfill for postMessage
-    window.postMessage = function (message, targetOrigin) {
-      // Your custom logic here before posting the message
-
-      // Log the message to the console (you can replace this with your desired action)
-      console.log(
-        "Polyfill - Custom message posted:",
-        message,
-        "to targetOrigin:",
-        targetOrigin
-      );
-    };
-  }
-
-  // Example usage of postMessage (you can replace this with your actual usage)
-  window.postMessage("Hello, polyfill!", "*");
-</script>
-
-<script>
   // Function to send a message to React Native
   function sendMessageToReactNative() {
     const agent = navigator.userAgent;
     console.log({ agent, win: window.ReactNativeWebView });
-    //return;
     const messageToReactNative = "Hello from !...";
     const payload = {
       action: "Toast",
@@ -66,8 +44,7 @@
         params: {},
       },
     };
-    //window.ReactNativeWebView.postMessage(JSON.stringify(payload));
-    window.postMessage(JSON.stringify(payload));
+    window.ReactNativeWebView.postMessage(JSON.stringify(payload));
   }
 </script>
 
