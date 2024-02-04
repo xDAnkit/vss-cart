@@ -7,6 +7,21 @@
     <!-- Your existing body content -->
 
     <script>
+      if (!window.postMessage) {
+        // Polyfill for postMessage
+        window.postMessage = function (message, targetOrigin) {
+          // Your custom logic here before posting the message
+
+          // Log the message to the console (you can replace this with your desired action)
+          console.log(
+            "Polyfill - Custom message posted:",
+            message,
+            "to targetOrigin:",
+            targetOrigin
+          );
+        };
+      }
+
       // Your custom logic in the web page
       console.log("Web page loaded");
 
