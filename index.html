@@ -22,34 +22,42 @@
   <body>
     <h1>WebView Communication Example</h1>
 
-    <script>
-      // Function to handle messages received from React Native
-      window.addEventListener("message", function (event) {
-        alert("Aaya Bhai");
-
-        const { platform } = event.data;
-        if (!platform) return;
-
-        alert("Aaya Bhai");
-        console.log("Received message in WebView:", platform);
-
-        // You can handle the received data here or perform any other actions
-        // For example, update the content of the HTML page with the received data
-        document.getElementById("receivedData").innerHTML = platform;
-      });
-
-      // Function to send a message to React Native
-      function sendMessageToReactNative() {
-        alert("Jara Bhai");
-        const messageToReactNative = "Hello from WebView!";
-        window.ReactNativeWebView.postMessage(messageToReactNative);
-      }
-    </script>
+    <p id="receivedData">Waiting for data from React Native...??</p>
 
     <button onclick="sendMessageToReactNative()">
-      Send Message to React Native
+      Send Message to React Native Local.....
     </button>
-
-    <p id="receivedData">Waiting for data from React Native...</p>
   </body>
 </html>
+
+<script>
+  // Function to send a message to React Native
+  function sendMessageToReactNative() {
+    const agent = navigator.userAgent;
+    console.log({ agent, win: window.ReactNativeWebView });
+    //return;
+    const messageToReactNative = "Hello from !...";
+    const payload = {
+      action: "Toast",
+      payload: {
+        message: "Hello From Web",
+        length: 1,
+        params: {},
+      },
+    };
+    window.ReactNativeWebView.postMessage(JSON.stringify(payload));
+  }
+</script>
+
+<script>
+  // Function to handle messages received from React Native
+
+  document.addEventListener(
+    "message",
+    function (event) {
+      document.getElementById("receivedData").innerHTML = event.data;
+      console.log("Message received from RN: ", event.data);
+    },
+    false
+  );
+</script>
