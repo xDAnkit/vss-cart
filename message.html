@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Your existing head content -->
+  </head>
+  <body>
+    <!-- Your existing body content -->
+
+    <script>
+      // Your custom logic in the web page
+      console.log("Web page loaded");
+
+      // Function to handle button click and send postMessage
+      function onButtonClick() {
+        // Send a postMessage to the parent window (assuming it's the mobile app)
+        const customMessage = "Hello, mobile app!";
+        window.parent.postMessage(customMessage, "*");
+        console.log("Message posted to the mobile app:", customMessage);
+      }
+
+      // Create a button and attach the onButtonClick function to its click event
+      const button = document.createElement("button");
+      button.textContent = "Click me!";
+      button.addEventListener("click", onButtonClick);
+
+      // Append the button to the body of the document
+      document.body.appendChild(button);
+
+      // Additional script logic if needed
+    </script>
+  </body>
+</html>
